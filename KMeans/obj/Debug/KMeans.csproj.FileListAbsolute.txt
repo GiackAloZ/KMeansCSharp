@@ -3,3 +3,8 @@ C:\Users\giacomo.aloisi\Desktop\KMeansCSharp\KMeans\bin\Debug\KMeans.pdb
 C:\Users\giacomo.aloisi\Desktop\KMeansCSharp\KMeans\obj\Debug\KMeans.csprojResolveAssemblyReference.cache
 C:\Users\giacomo.aloisi\Desktop\KMeansCSharp\KMeans\obj\Debug\KMeans.dll
 C:\Users\giacomo.aloisi\Desktop\KMeansCSharp\KMeans\obj\Debug\KMeans.pdb
+C:\Users\GiackAloZ\Desktop\KmeansCSharp\KMeans\bin\Debug\KMeans.dll
+C:\Users\GiackAloZ\Desktop\KmeansCSharp\KMeans\bin\Debug\KMeans.pdb
+C:\Users\GiackAloZ\Desktop\KmeansCSharp\KMeans\obj\Debug\KMeans.csprojResolveAssemblyReference.cache
+C:\Users\GiackAloZ\Desktop\KmeansCSharp\KMeans\obj\Debug\KMeans.dll
+C:\Users\GiackAloZ\Desktop\KmeansCSharp\KMeans\obj\Debug\KMeans.pdb

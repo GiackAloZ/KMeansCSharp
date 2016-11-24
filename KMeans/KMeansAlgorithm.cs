@@ -149,6 +149,7 @@ namespace KMeans
                     CalculateNewCentroidPosition(c);
                 if (CheckConvergence())
                     go = false;
+				_anyChanges = false;
             }
         }
         private void ClearAllSavedData()
