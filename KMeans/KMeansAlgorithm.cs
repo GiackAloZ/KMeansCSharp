@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using KMeans.Exceptions;
+
 namespace KMeans
 {
     public class KMeansAlgorithm
@@ -154,8 +156,8 @@ namespace KMeans
                 if (CheckConvergence())
                     go = false;
 				_anyChanges = false;
-				if (cont++ > 100)
-					throw new Exception("lezo");
+				if (cont++ > _pointsNumber * 100)
+					throw new NotConvergentException("It seems that the algorithm has done too much iterations. Maybe it doesn't converge?");
             }
         }
         private void ClearAllSavedData()

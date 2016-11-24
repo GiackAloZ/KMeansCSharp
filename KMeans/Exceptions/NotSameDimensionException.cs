@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KMeans
+namespace KMeans.Exceptions
 {
     public class NotSameDimensionException : KMeansException
     {
