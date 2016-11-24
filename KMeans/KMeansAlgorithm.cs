@@ -73,16 +73,20 @@ namespace KMeans
             foreach(Point p in _points)
             {
                 if(res != -1)
+				{
                     if (res != p.Coordinates.Count)
                         throw new NotSameDimensionException("A point has not the same dimensions number as the others");
+				}
                 else
                     res = p.Coordinates.Count;
             }
             foreach(Centroid c in _centroids)
             {
                 if (res != -1)
+				{
                     if (res != c.Coordinates.Count)
                         throw new NotSameDimensionException("A centroid has not the same dimensions number as the others");
+				}
                 else
                     res = c.Coordinates.Count;
             }
@@ -90,13 +94,15 @@ namespace KMeans
         }
         private void CalculateMaxMinCoordinates()
         {
-            _maxCoordinate = new List<double>(_dimensions);
-            _minCoordinate = new List<double>(_dimensions);
-            for(int i = 0; i < _dimensions; i++)
-            {
-                _maxCoordinate[i] = double.MinValue;
-                _minCoordinate[i] = double.MaxValue;
-            }
+            _maxCoordinate = new List<double>();
+            _minCoordinate = new List<double>();
+
+			for(int i = 0; i < _dimensions; i++)
+			{
+				_maxCoordinate.Add(double.MinValue);
+				_minCoordinate.Add(double.MaxValue);
+			}
+
             foreach(Point p in _points)
             {
                 for(int i = 0; i < _dimensions; i++)
@@ -128,11 +134,8 @@ namespace KMeans
                 List<double> coord = new List<double>(_dimensions);
                 for(int j = 0; j < _dimensions; j++)
                 {
-                    double diff = _maxCoordinate[i] - _minCoordinate[i];
-                    if (diff == 0)
-                        coord.Add(_minCoordinate[i]);
-                    else
-                        coord.Add(r.NextDouble() * diff + _minCoordinate[i]);
+                    double diff = _maxCoordinate[j] - _minCoordinate[j];
+                    coord.Add(r.NextDouble() * diff + _minCoordinate[j]);
                 }
                 _centroids.Add(new Centroid(coord));
             }
@@ -140,6 +143,7 @@ namespace KMeans
         private void StartAlgorithm()
         {
             bool go = true;
+			int cont = 0;
             while (go)
             {
                 ClearAllSavedData();
@@ -150,6 +154,8 @@ namespace KMeans
                 if (CheckConvergence())
                     go = false;
 				_anyChanges = false;
+				if (cont++ > 100)
+					throw new Exception("lezo");
             }
         }
         private void ClearAllSavedData()
@@ -192,6 +198,8 @@ namespace KMeans
                     minPoint = p;
                 }
             }
+			for (int i = 0; i < _dimensions; i++)
+				c.Coordinates[i] = minPoint.Coordinates[i];
             c.MyPoints.Add(minPoint);
             minPoint.MyCentroid = c;
         }
