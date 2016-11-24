@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Centroid.cs" />
     <Compile Include="Exceptions\KMeansException.cs" />
+    <Compile Include="Exceptions\NotEnoughCentroidsException.cs" />
     <Compile Include="Exceptions\NotEnoughPointsException.cs" />
     <Compile Include="KMeansAlgorithm.cs" />
     <Compile Include="Exceptions\NotSameDimensionException.cs" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KMeans
 {
-    internal class Point
+    public class Point
     {
         public List<double> Coordinates;
 

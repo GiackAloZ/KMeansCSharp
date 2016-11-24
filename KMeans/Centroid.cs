@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KMeans
 {
-    internal class Centroid
+    public class Centroid
     {
         public List<double> Coordinates { get; set; }
 
