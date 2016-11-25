@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="KMeans.Centroid">
+    <Position X="9.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Centroid.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="MyPoints" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="KMeans.KMeansAlgorithm">
+    <Position X="4.5" Y="1.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AABAQAAAAAAQhEAAkSCEAABAgAADAIQAAAACAAAQgQA=</HashCode>
+      <FileName>KMeansAlgorithm.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_centroids" />
+      <Field Name="_points" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="KMeans.Point">
+    <Position X="9.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Point.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="MyCentroid" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
