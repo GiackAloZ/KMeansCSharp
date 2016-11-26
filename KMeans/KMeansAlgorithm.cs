@@ -36,12 +36,23 @@ namespace KMeans
 			_pointsNumber++;
 		}
 
-		public void AddCentroid(List<double> coord)
+        public void AddPoint(Point p)
+        {
+            _points.Add(p);
+            _pointsNumber++;
+        }
+
+        public void AddCentroid(List<double> coord)
 		{
 			_centroids.Add(new Centroid(coord));
 		}
 
-		public List<Centroid> CalculateResult()
+        public void AddCentroid(Centroid c)
+        {
+            _centroids.Add(c);
+        }
+
+        public List<Centroid> CalculateResult()
 		{
 			Init();
 

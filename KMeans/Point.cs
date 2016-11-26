@@ -8,7 +8,7 @@ namespace KMeans
 {
     public class Point
     {
-		public string Name { get; set; }
+        public string Name { get; set; }
         public List<double> Coordinates { get; set; }
         public Centroid MyCentroid { get; set; }
 		public Point() { Coordinates = new List<double>(); MyCentroid = null; }
