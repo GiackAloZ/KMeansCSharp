@@ -69,6 +69,11 @@ namespace KMeans
 
 		public List<Centroid> NextStep(out bool end)
 		{
+			if (_counter++ == 0)
+			{
+				end = false;
+				return _centroids;
+			}
 			ClearAllSavedData();
 			foreach (Point p in _points)
 				CalculateAndAssignNearestCentroid(p);
