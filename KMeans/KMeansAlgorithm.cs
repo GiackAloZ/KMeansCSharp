@@ -93,9 +93,22 @@ namespace KMeans
 			CalculateMaxMinCoordinates();
 			CalculateCentroidNumber();
 			CheckCentroidNumber();
-			CalculateRandomCentroids();
+            List<double> gaussCoord = CalculateGaussCoordinates();
+			CalculateRandomCentroids(gaussCoord);
 		}
-		private void CheckCentroidNumber()
+        private List<double> CalculateGaussCoordinates()
+        {
+            List<double> res = new List<double>();
+            for (int i = 0; i < _dimensions; i++)
+                res.Add(0);
+            foreach (Point p in _points)
+                for (int i = 0; i < _dimensions; i++)
+                    res[i] += p.Coordinates[i];
+            for (int i = 0; i < _dimensions; i++)
+                res[i] /= _points.Count;
+            return res;
+        }
+        private void CheckCentroidNumber()
 		{
 			if (_centroidsNumber < 1)
 				throw new NotEnoughCentroidsException("There are less than 1 centroid");
@@ -165,22 +178,49 @@ namespace KMeans
 			if (_centroids.Count > _centroidsNumber)
 				_centroidsNumber = _centroids.Count;
 		}
-		private void CalculateRandomCentroids()
+		private void CalculateRandomCentroids(List<double> gaussCoord)
 		{
 			int centroidsLeft = _centroidsNumber - _centroids.Count;
 			Random r = new Random();
 			for (int i = 0; i < centroidsLeft; i++)
 			{
 				List<double> coord = new List<double>(_dimensions);
-				for (int j = 0; j < _dimensions; j++)
-				{
-					double diff = _maxCoordinate[j] - _minCoordinate[j];
-					coord.Add(r.NextDouble() * diff + _minCoordinate[j]);
-				}
+                if(_dimensions == 2)
+                {
+                    double rad = CalculateGaussianRadius(gaussCoord);
+                    double rand = r.NextDouble();
+                    double z0 = rad * Math.Cos(2 * Math.PI * rand);
+                    double z1 = rad * Math.Sin(2 * Math.PI * rand);
+                    coord.Add(z0);
+                    coord.Add(z1);
+                }
+                else
+                {
+                    for (int j = 0; j < _dimensions; j++)
+                    {
+                        double diff = _maxCoordinate[j] - _minCoordinate[j];
+                        coord.Add(r.NextDouble() * diff + _minCoordinate[j]);
+                    }
+                }
 				_centroids.Add(new Centroid(coord));
 			}
 		}
-		private void StartAlgorithm()
+        private double CalculateGaussianRadius(List<double> gaussCoord)
+        {
+            double maxDist = double.MinValue;
+
+            foreach(Point p in _points)
+            {
+                double vectorSum = 0;
+                for (int i = 0; i < _dimensions; i++)
+                    vectorSum += Math.Pow(p.Coordinates[i] - gaussCoord[i], 2);
+                if (vectorSum > maxDist)
+                    maxDist = vectorSum;
+            }
+
+            return maxDist;
+        }
+        private void StartAlgorithm()
 		{
 			bool go = true;
 			_counter = 0;

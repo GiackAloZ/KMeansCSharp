@@ -3,33 +3,33 @@
   <Class Name="KMeans.Centroid">
     <Position X="9.25" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAQAIAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Centroid.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Property Name="MyPoints" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="KMeans.KMeansAlgorithm">
-    <Position X="4.5" Y="1.5" Width="3.25" />
-    <TypeIdentifier>
-      <HashCode>AABAQAAAAAAQhEAAkSCEAABAgAADAIQAAAACAAAQgQA=</HashCode>
-      <FileName>KMeansAlgorithm.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Field Name="_centroids" />
-      <Field Name="_points" />
-    </ShowAsCollectionAssociation>
-  </Class>
   <Class Name="KMeans.Point">
     <Position X="9.25" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAABAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAIAAAAAAAABAAAAAAAAA=</HashCode>
       <FileName>Point.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="MyCentroid" />
     </ShowAsAssociation>
+  </Class>
+  <Class Name="KMeans.KMeansAlgorithm">
+    <Position X="4.5" Y="1.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AABAQAACAAAQhEAAkSCkAgBAgAADAIQAAAACQAAQkQA=</HashCode>
+      <FileName>KMeansAlgorithm.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_points" />
+      <Field Name="_centroids" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
