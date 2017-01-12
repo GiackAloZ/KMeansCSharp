@@ -93,8 +93,11 @@ namespace KMeans
 			CalculateMaxMinCoordinates();
 			CalculateCentroidNumber();
 			CheckCentroidNumber();
+            /*
             List<double> gaussCoord = CalculateGaussCoordinates();
 			CalculateRandomCentroids(gaussCoord);
+            */
+            CalculateRandomCentroids();
 		}
         private List<double> CalculateGaussCoordinates()
         {
@@ -178,6 +181,39 @@ namespace KMeans
 			if (_centroids.Count > _centroidsNumber)
 				_centroidsNumber = _centroids.Count;
 		}
+        private void CalculateRandomCentroids()
+        {
+            int centroidsLeft = _centroidsNumber - _centroids.Count;
+            Random r = new Random();
+            for (int i = 0; i < centroidsLeft; i++)
+            {
+                List<double> coord = new List<double>(_dimensions);
+                List<double> uiList;
+                double radiusSquared = 0;
+                while (true)
+                {
+                    uiList = new List<double>(_dimensions);
+                    for (int j = 0; j < _dimensions; j++)
+                    {
+                        double tmp = r.NextDouble() * 2 - 1; //Numero random tra [-1; 1]
+                        uiList.Add(tmp);
+                        radiusSquared += tmp * tmp;
+                    }
+                    if (radiusSquared < 1)
+                        break;
+                    radiusSquared = 0;
+                }
+                for (int j = 0; j < _dimensions; j++)
+                {
+                    double tmp = uiList[j] * Math.Sqrt((-2) * Math.Log(radiusSquared) / radiusSquared);
+                    double pos = (_maxCoordinate[j] - _minCoordinate[j]) / 2 + _minCoordinate[j] + (tmp);
+                    if (pos < _minCoordinate[j] || pos > _maxCoordinate[j])
+                        throw new Exception("WOW amazing");
+                    coord.Add(pos);
+                }
+                _centroids.Add(new Centroid(coord));
+            }
+        }
 		private void CalculateRandomCentroids(List<double> gaussCoord)
 		{
 			int centroidsLeft = _centroidsNumber - _centroids.Count;
