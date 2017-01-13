@@ -1,7 +1,7 @@
 Ui = numero random i-esimo tra [-1,1] 
 Xi = valore del punto nella i-esima dimensione
 
-Xi = Ui * rad((-2)*(ln(R^2))/R^2)
+Xi = Ui * sqrt((-2)*(ln(R^2))/R^2)
 
 R^2 = Sum i from 1 to N of Ui^2
 
