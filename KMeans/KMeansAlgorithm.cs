@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using KMeans.Exceptions;
+using System.Collections.ObjectModel;
 
 namespace KMeans
 {
@@ -24,13 +25,13 @@ namespace KMeans
 
 		private int _counter = 0;
 
-		private List<double> _maxCoordinate;
+		private ObservableCollection<double> _maxCoordinate;
 
-		private List<double> _minCoordinate;
+		private ObservableCollection<double> _minCoordinate;
 
 		public KMeansAlgorithm(int k) { _centroidsNumber = k; }
 
-		public void AddPoint(List<double> coord)
+		public void AddPoint(ObservableCollection<double> coord)
 		{
 			_points.Add(new Point(coord));
 			_pointsNumber++;
@@ -42,7 +43,7 @@ namespace KMeans
             _pointsNumber++;
         }
 
-        public void AddCentroid(List<double> coord)
+        public void AddCentroid(ObservableCollection<double> coord)
 		{
 			_centroids.Add(new Centroid(coord));
 		}
@@ -94,14 +95,14 @@ namespace KMeans
 			CalculateCentroidNumber();
 			CheckCentroidNumber();
             /*
-            List<double> gaussCoord = CalculateGaussCoordinates();
+            ObservableCollection<double> gaussCoord = CalculateGaussCoordinates();
 			CalculateRandomCentroids(gaussCoord);
             */
             CalculateRandomCentroids();
 		}
-        private List<double> CalculateGaussCoordinates()
+        private ObservableCollection<double> CalculateGaussCoordinates()
         {
-            List<double> res = new List<double>();
+            ObservableCollection<double> res = new ObservableCollection<double>();
             for (int i = 0; i < _dimensions; i++)
                 res.Add(0);
             foreach (Point p in _points)
@@ -150,8 +151,8 @@ namespace KMeans
 		}
 		private void CalculateMaxMinCoordinates()
 		{
-			_maxCoordinate = new List<double>();
-			_minCoordinate = new List<double>();
+			_maxCoordinate = new ObservableCollection<double>();
+			_minCoordinate = new ObservableCollection<double>();
 
 			for (int i = 0; i < _dimensions; i++)
 			{
@@ -187,12 +188,12 @@ namespace KMeans
             Random r = new Random();
             for (int i = 0; i < centroidsLeft; i++)
             {
-                List<double> coord = new List<double>(_dimensions);
-                List<double> uiList;
+                ObservableCollection<double> coord = new ObservableCollection<double>();
+                ObservableCollection<double> uiList;
                 double radiusSquared = 0;
                 while (true)
                 {
-                    uiList = new List<double>(_dimensions);
+                    uiList = new ObservableCollection<double>();
                     for (int j = 0; j < _dimensions; j++)
                     {
                         double tmp = r.NextDouble() * 2 - 1; //Numero random tra [-1; 1]
@@ -214,13 +215,13 @@ namespace KMeans
                 _centroids.Add(new Centroid(coord));
             }
         }
-		private void CalculateRandomCentroids(List<double> gaussCoord)
+		private void CalculateRandomCentroids(ObservableCollection<double> gaussCoord)
 		{
 			int centroidsLeft = _centroidsNumber - _centroids.Count;
 			Random r = new Random();
 			for (int i = 0; i < centroidsLeft; i++)
 			{
-				List<double> coord = new List<double>(_dimensions);
+				ObservableCollection<double> coord = new ObservableCollection<double>();
                 if(_dimensions == 2)
                 {
                     double rad = CalculateGaussianRadius(gaussCoord);
@@ -241,7 +242,7 @@ namespace KMeans
 				_centroids.Add(new Centroid(coord));
 			}
 		}
-        private double CalculateGaussianRadius(List<double> gaussCoord)
+        private double CalculateGaussianRadius(ObservableCollection<double> gaussCoord)
         {
             double maxDist = double.MinValue;
 
@@ -284,7 +285,7 @@ namespace KMeans
 		private void CalculateAndAssignNearestCentroid(Point p)
 		{
 			double minDist = double.MaxValue;
-			Centroid minCentroid = new Centroid(new List<double>());
+			Centroid minCentroid = new Centroid(new ObservableCollection<double>());
 			foreach (Centroid c in _centroids)
 			{
 				double vectorSum = 0;
@@ -302,7 +303,7 @@ namespace KMeans
 		private void AssignNearestPoint(Centroid c)
 		{
 			double minDist = double.MaxValue;
-			Point minPoint = new Point(new List<double>());
+			Point minPoint = new Point(new ObservableCollection<double>());
 			foreach (Point p in _points)
 			{
 				double vectorSum = 0;
