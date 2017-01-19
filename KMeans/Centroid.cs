@@ -12,8 +12,8 @@ namespace KMeans
 		public string Name { get; set; }
         public ObservableCollection<double> Coordinates { get; set; }
         public List<Point> MyPoints { get; set; }
-		public Centroid() : this(new ObservableCollection<double>()) {}
-		public Centroid(string n) : this() { Name = n; }
+		public Centroid(string n) : this(new ObservableCollection<double>()) { Name = n; }
         public Centroid(ObservableCollection<double> c) { Coordinates = c; MyPoints = new List<Point>(); }
+        public Centroid(string n, ObservableCollection<double> d) : this(d) { Name = n; }
     }
 }
