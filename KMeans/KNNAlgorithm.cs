@@ -12,14 +12,17 @@ namespace KMeans
     {
         public List<Centroid> _features;
 
+		public int K { get; set; }
+
         public KNNAlgorithm() { }
-        public KNNAlgorithm(List<KMeans.Centroid> pp)
+        public KNNAlgorithm(int k, List<KMeans.Centroid> pp)
         {
+			K = k;
             _features = pp;
             CheckFeaturesDimensions();
         }
 
-        private void CheckFeaturesDimensions()
+        private int CheckFeaturesDimensions()
         {
             int d = 0;
             foreach(Centroid c in _features)
@@ -29,26 +32,46 @@ namespace KMeans
                         throw new NotSameDimensionException();
                 d = c.Coordinates.Count;
             }
+			return d;
         }
 
-        public Centroid GetPointFeature(KMeans.Point p)
+        public Centroid GetPointFeature(Point evalP)
         {
-            if(p.Coordinates.Count != _features?[0].Coordinates.Count)
-                throw new NotSameDimensionException();
-            Centroid res = null;
-            double minDist = Double.MaxValue;
-            foreach (Centroid c in _features)
-            {
-                double vectorSum = 0;
-                for (int i = 0; i < p.Coordinates.Count; i++)
-                    vectorSum += Math.Pow(p.Coordinates[i] - c.Coordinates[i], 2);
-                if (vectorSum < minDist)
-                {
-                    minDist = vectorSum;
-                    res = c;
-                }
-            }
-            return res;
+			if (evalP.Coordinates.Count != CheckFeaturesDimensions())
+				throw new NotSameDimensionException("The points have not the same dimensions as the evaluated point");
+			List<Tuple<double, Point>> distances = new List<Tuple<double, Point>>();
+			foreach(Centroid c in _features)
+			{
+				foreach(Point p in c.MyPoints)
+				{
+					distances.Add(new Tuple<double, Point>(p.CalculateDistSquared(evalP), p));
+				}
+			}
+			distances.Sort();
+			int[] numbers = new int[_features.Count];
+			for (int i = 0; i < _features.Count; i++)
+				numbers[i] = 0;
+			int kk = K;
+			for(int i = 0; i < kk; i++)
+			{
+				if(distances[i].Item2.MyCentroid == null)
+				{
+					kk++;
+					continue;
+				}
+				numbers[_features.FindIndex((x) => (x == distances[i].Item2.MyCentroid))]++;
+			}
+			int max = -1;
+			Centroid res = null;
+			for(int i = 0; i < _features.Count; i++)
+			{
+				if(max < numbers[i])
+				{
+					max = numbers[i];
+					res = _features[i];
+				}
+			}
+			return res;
         }
     }
 }
