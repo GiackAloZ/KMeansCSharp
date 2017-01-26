@@ -47,7 +47,11 @@ namespace KMeans
 					distances.Add(new Tuple<double, Point>(p.CalculateDistSquared(evalP), p));
 				}
 			}
-			distances.Sort();
+            try
+            {
+			    distances.Sort();
+            }
+            catch(Exception ex) { return null; }
 			int[] numbers = new int[_features.Count];
 			for (int i = 0; i < _features.Count; i++)
 				numbers[i] = 0;
